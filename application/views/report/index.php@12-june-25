@@ -1,0 +1,217 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Manage
+      <small>Report</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Report</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+
+        <div id="messages"></div>
+
+
+      
+        <div class="box">
+          <div class="box-header">
+            <h3 class="box-title">Manage Report</h3>
+          </div>
+          <!-- /.box-header -->
+
+          <div class="box-body">
+
+
+          <form id="report_form">
+            <div class="row">
+            <input type="hidden" class="form-control" value="1" placeholder="" name="filter_submit" id="filter_submit">
+            <div class="col-md-3">
+            <div class="form-group">
+            <label for="contact">Query</label>
+            <input type="text" class="form-control" value="<?php echo $filter_q;  ?>" placeholder="Serach by / ID/  Contact Name/Email/Phone /Item Name " name="filter_q" id="filter_q">
+
+            </div>
+            </div>
+
+            <div class="col-md-2">
+            <div class="form-group">
+            <label for="contact">Contact</label>
+            <select class="form-control" id="filter_contact_id" name="filter_contact_id">
+            <option value="">Select</option>
+              <?php if($contactList){
+              foreach($contactList as $row){  
+              ?>
+              <option value="<?php echo $row['id']; ?>" <?php if($filter_contact_id==$row['id']){ echo "selected"; }  ?>><?php echo $row['name']; ?></option>
+              <?php }} ?>
+            </select>
+            </div>
+            </div>
+           
+
+            <div class="col-md-1">
+            <div class="form-group">
+            <label for="store_id">Type</label>
+            <select class="form-control" id="filter_checkout_type" name="filter_checkout_type">
+              <option value="">Select</option>
+              <option value="checkin" <?php if($filter_checkout_type=='checkin'){ echo "selected"; }  ?>>Check In</option>
+              <option value="checkout" <?php if($filter_checkout_type=='checkout'){ echo "selected"; }  ?>>Check Out</option>
+              <option value="damage" <?php if($filter_checkout_type=='damage'){ echo "selected"; }  ?>>Damage</option>
+            </select>
+            </div>
+            </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-2">
+                      <div class="form-group">
+                          <label for="contact">From Date</label>
+                          <input type="date" class="form-control"  name="filter_from_date" id="filter_from_date" value="<?php echo $filter_from_date;  ?>">
+                        
+                      </div>
+                  </div>
+
+                  <div class="col-md-2">
+                      <div class="form-group">
+                          <label for="contact">To Date</label>
+                          <input type="date" class="form-control"  name="filter_to_date" id="filter_to_date" value="<?php echo $filter_to_date;  ?>">
+                        
+                      </div>
+                  </div>
+
+                  
+                
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Search</button>
+                <a href="javascript:void(0)" class="btn btn-warning" onclick="resetSearch()" >Reset</a>
+            </div>
+
+             <?php if($filter_submit && $is_report_download && $reports){ ?>
+              <div class="box-footer">
+                  <a href="javascript:void(0)" class="btn btn-danger" onclick="exportReport()" >Download Report</a>
+              </div>
+             <?php } ?>
+
+          </form>
+
+          </div>
+          <div class="box-body">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Date</th>
+                    <th>Contact</th>
+                   
+                    <!--th>Phone</th>
+                    <th>Email</th-->
+                    <th>Item</th>
+                    
+                    <th>Stock</th>
+                  	<th>Chamber</th>
+                  	<th>Rack</th>
+                  
+                    <th>Type</th>
+                    
+                   
+                    <!-- <th>Status</th> -->
+                    <?php if(in_array('updateReport', $user_permission) || in_array('deleteReport', $user_permission)): ?>
+                      <!--th>Action</th-->
+                    <?php endif; ?>
+                   
+                    
+                </tr>
+              </thead>
+              <tbody>
+                <?php if($reports){ 
+                foreach($reports as $row){  
+                ?>
+                <tr>
+                    <td><?php echo $row['checkin_id'];  ?></td>
+                    <td><?php echo date("d/m/Y",strtotime($row['date']));  ?></td>
+                    <td><?php echo $row['customer_name'];  ?></td>
+                    
+                    <!--td><?php echo $row['customer_phone'];  ?></td>
+                    <td><?php echo $row['customer_email'];  ?></td-->
+                    <td><?php echo $row['item_name'];  ?></td>
+                    
+                    <td><span class="badge badge-danger"><?php echo $row['stock'];  ?> <?php echo $row['unit_code'];  ?></span></td>
+                   <td><span class="badge badge-danger"><?php echo $row['chamber_name'];  ?></span></td>
+                  <td><span class="badge badge-danger"><?php echo $row['rack_name'];  ?></span></td>
+                  
+                    <td>
+                      <?php if($row['checkout_type']=='checkin'){ ?>
+                      <span class="badge badge-success"><?php echo ucfirst('Check In'); ?></span>
+                      <?php } ?>
+
+                       <?php if($row['checkout_type']=='checkout'){ ?>
+                      <span class="badge badge-danger"><?php echo ucfirst('Check Out'); ?></span>
+                      <?php } ?>
+
+                      <?php if($row['checkout_type']=='damage'){ ?>
+                      <span class="badge badge-warning"><?php echo ucfirst('Damage'); ?></span>
+                      <?php } ?>
+                    
+                    </td>
+                   
+                    
+                    
+                </tr>
+                <?php }}else{ ?>
+
+                  <tr>
+                      <td colspan="9">No Record Found</td>
+                </tr>
+
+                <?php } ?>
+              </tbody>
+
+
+            
+
+            </table>
+             <div><?php echo $pagination; ?></div>
+          </div>
+          <!-- /.box-body -->
+
+         
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- col-md-12 -->
+    </div>
+    <!-- /.row -->
+    
+
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+
+<script type="text/javascript">
+  var manageTable;
+  $(document).ready(function() {
+    $("#reportNav").addClass('active');
+  });
+
+  function resetSearch(){
+    window.location.replace("<?php echo base_url('report'); ?>");
+  }
+
+  function exportReport(){
+       
+      $("#report_form").attr("action","<?php echo base_url('report/exportReport'); ?>").submit().attr("action","");
+     
+    
+  }
+</script>

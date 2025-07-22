@@ -1,0 +1,304 @@
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+        
+        <li id="dashboardMainMenu">
+          <a href="<?php echo base_url('dashboard') ?>">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+          </a>
+        </li>
+
+        <?php if($user_permission): ?>
+          <?php if(in_array('createUser', $user_permission) || in_array('updateUser', $user_permission) || in_array('viewUser', $user_permission) || in_array('deleteUser', $user_permission)): ?>
+            <li class="treeview" id="mainUserNav">
+            <a href="#">
+              <i class="fa fa-users"></i>
+              <span>Users</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              
+              <?php if(in_array('updateUser', $user_permission) || in_array('viewUser', $user_permission) || in_array('deleteUser', $user_permission)): ?>
+              <li id="manageUserNav"><a href="<?php echo base_url('users') ?>"><i class="fa fa-circle-o"></i> Manage Users</a></li>
+            <?php endif; ?>
+              
+              <?php if(in_array('createUser', $user_permission)): ?>
+              <li id="createUserNav"><a href="<?php echo base_url('users/create') ?>"><i class="fa fa-circle-o"></i> Add User</a></li>
+              <?php endif; ?>
+              
+              
+              <?php if(in_array('updateGroup', $user_permission) || in_array('viewGroup', $user_permission) || in_array('deleteGroup', $user_permission)): ?>
+                <li id="manageGroupNav"><a href="<?php echo base_url('groups') ?>"><i class="fa fa-circle-o"></i> Manage Roles</a></li>
+                <?php endif; ?>
+              
+              <?php if(in_array('createGroup', $user_permission)): ?>
+                  <li id="addGroupNav"><a href="<?php echo base_url('groups/create') ?>"><i class="fa fa-circle-o"></i> Add Role</a></li>
+                <?php endif; ?>
+                
+
+              
+            </ul>
+          </li>
+          <?php endif; ?>
+
+          
+
+          <?php if(in_array('viewChamber', $user_permission) || in_array('viewRack', $user_permission) || in_array('viewUnit', $user_permission)): ?>
+            <li class="treeview" id="mainManagementNav">
+              <a href="#">
+                <i class="fa fa-files-o"></i>
+                <span>Coldstorage Setting</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+
+                <?php if(in_array('createChamber', $user_permission) || in_array('updateChamber', $user_permission) || in_array('viewChamber', $user_permission) || in_array('deleteChamber', $user_permission)): ?>
+                  <li id="chamberNav">
+                    <a href="<?php echo base_url('chamber/') ?>">
+                      <i class="fa fa-files-o"></i> <span>Chambers</span>
+                    </a>
+                  </li>
+                <?php endif; ?>
+
+                <?php if(in_array('createRack', $user_permission) || in_array('updateRack', $user_permission) || in_array('viewRack', $user_permission) || in_array('deleteRack', $user_permission)): ?>
+                  <li id="rackNav">
+                    <a href="<?php echo base_url('rack/') ?>">
+                      <i class="fa fa-files-o"></i> <span>Racks</span>
+                    </a>
+                  </li>
+                <?php endif; ?>
+
+                <?php if(in_array('createUnit', $user_permission) || in_array('updateUnit', $user_permission) || in_array('viewUnit', $user_permission) || in_array('deleteUnit', $user_permission)): ?>
+                <li id="unitNav">
+                  <a href="<?php echo base_url('unit/') ?>">
+                    <i class="fa fa-files-o"></i> <span>Units</span>
+                  </a>
+                </li>
+              <?php endif; ?>
+                
+                <?php if(in_array('updateTotalcapacity', $user_permission)): ?>
+                <li id="settingNav">
+                  <a href="<?php echo base_url('setting/') ?>">
+                    <i class="fa fa-files-o"></i> <span>Total Capacity</span>
+                  </a>
+                </li>
+              <?php endif; ?>
+
+              </ul>
+            </li>
+          <?php endif; ?>
+
+
+          <?php if(in_array('viewCategory', $user_permission) || in_array('viewItem', $user_permission) ): ?>
+            <li class="treeview" id="mainProductNav">
+              <a href="#">
+                <i class="fa fa-files-o"></i>
+                <span>Products</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+
+              <?php if(in_array('createCategory', $user_permission) || in_array('updateCategory', $user_permission) || in_array('viewCategory', $user_permission) || in_array('deleteCategory', $user_permission)): ?>
+                <li id="categoryNav">
+                  <a href="<?php echo base_url('category/') ?>">
+                    <i class="fa fa-files-o"></i> <span>Category</span>
+                  </a>
+                </li>
+              <?php endif; ?>
+
+              <?php if(in_array('createItem', $user_permission) || in_array('updateItem', $user_permission) || in_array('viewItem', $user_permission) || in_array('deleteItem', $user_permission)): ?>
+                <li id="itemNav">
+                  <a href="<?php echo base_url('item/') ?>">
+                    <i class="fa fa-files-o"></i> <span>Items</span>
+                  </a>
+                </li>
+              <?php endif; ?>
+                
+
+              </ul>
+            </li>
+          <?php endif; ?>
+
+
+          <?php if(in_array('viewCheckin', $user_permission) || in_array('viewCheckout', $user_permission) ): ?>
+            <li class="treeview" id="mainStockNav">
+              <a href="#">
+                <i class="fa fa-files-o"></i>
+                <span>Stocks</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+
+              <?php if(in_array('createCheckin', $user_permission) || in_array('updateCheckin', $user_permission) || in_array('viewCheckin', $user_permission) || in_array('deleteCheckin', $user_permission)): ?>
+            <li id="checkinNav">
+              <a href="<?php echo base_url('checkin/') ?>">
+                <i class="fa fa-files-o"></i> <span>Stock In</span>
+              </a>
+            </li>
+          <?php endif; ?>
+
+          <?php if(in_array('createCheckout', $user_permission) || in_array('updateCheckout', $user_permission) || in_array('viewCheckout', $user_permission) || in_array('deleteCheckout', $user_permission)): ?>
+            <li id="checkoutNav">
+              <a href="<?php echo base_url('checkout/') ?>">
+                <i class="fa fa-files-o"></i> <span>Stock Out</span>
+              </a>
+            </li>
+          <?php endif; ?>
+                
+
+              </ul>
+            </li>
+          <?php endif; ?>
+
+
+          <?php if(in_array('createContact', $user_permission) || in_array('updateContact', $user_permission) || in_array('viewContact', $user_permission) || in_array('deleteContact', $user_permission)): ?>
+            <li id="contactNav">
+              <a href="<?php echo base_url('contact/') ?>">
+                <i class="fa fa-files-o"></i> <span>Customers</span>
+              </a>
+            </li>
+          <?php endif; ?>
+
+          
+
+          
+
+          
+
+         
+
+
+           <?php if(in_array('viewFixedAsset', $user_permission) || in_array('viewFixedAssetServiceType', $user_permission) || in_array('viewFixedAssetHeads', $user_permission)): ?>
+            <li class="treeview" id="mainAssetsNav">
+              <a href="#">
+                <i class="fa fa-files-o"></i>
+                <span>Machine & Compliences</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+
+                <?php if(in_array('createFixedAsset', $user_permission) || in_array('updateFixedAsset', $user_permission) || in_array('viewFixedAsset', $user_permission) || in_array('deleteFixedAsset', $user_permission)): ?>
+                  <li id="fixed_assestNav">
+                    <a href="<?php echo base_url('fixed_asset/') ?>">
+                      <i class="fa fa-files-o"></i> <span>Fixed Assets</span>
+                    </a>
+                  </li>
+                <?php endif; ?>
+
+                  <?php if(in_array('createFixedAssetServiceType', $user_permission) || in_array('updateFixedAssetServiceType', $user_permission) || in_array('viewFixedAssetServiceType', $user_permission) || in_array('deleteFixedAssetServiceType', $user_permission)): ?>
+                  <li id="fixed_asset_service_typeNav">
+                    <a href="<?php echo base_url('fixed_asset_service_type/') ?>">
+                      <i class="fa fa-files-o"></i> <span>Fixed Assets Service Type</span>
+                    </a>
+                  </li>
+                <?php endif; ?>
+
+                <?php if(in_array('createFixedAssetHeads', $user_permission) || in_array('updateFixedAssetHeads', $user_permission) || in_array('viewFixedAssetHeads', $user_permission) || in_array('deleteFixedAssetHeads', $user_permission)): ?>
+                  <li id="feixed_asset_headsNav">
+                    <a href="<?php echo base_url('fixed_asset_heads/') ?>">
+                      <i class="fa fa-files-o"></i> <span>Fixed Assets Heads</span>
+                    </a>
+                  </li>
+                <?php endif; ?>
+
+              </ul>
+            </li>
+          <?php endif; ?>
+
+
+           <?php if(in_array('viewExpense', $user_permission) || in_array('viewExpenseHeads', $user_permission)): ?>
+            <li class="treeview" id="mainExpenseNav">
+                <a href="#">
+                  <i class="fa fa-files-o"></i>
+                  <span>Income & Expenses</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+              <ul class="treeview-menu">
+
+                  <?php if(in_array('createPayment', $user_permission) || in_array('updatePayment', $user_permission) || in_array('viewPayment', $user_permission) || in_array('deletePayment', $user_permission)): ?>
+            <li id="paymentNav">
+              <a href="<?php echo base_url('payment/') ?>">
+                <i class="fa fa-files-o"></i> <span>Income</span>
+              </a>
+            </li>
+          <?php endif; ?>
+               
+                  <?php if(in_array('createExpense', $user_permission) || in_array('updateExpense', $user_permission) || in_array('viewExpense', $user_permission) || in_array('deleteExpense', $user_permission)): ?>
+                      <li id="expenseNav">
+                        <a href="<?php echo base_url('expense/') ?>">
+                          <i class="fa fa-files-o"></i> <span>Expenses</span>
+                        </a>
+                      </li>
+                    <?php endif; ?>
+
+                      <?php if(in_array('createExpenseHeads', $user_permission) || in_array('updateExpenseHeads', $user_permission) || in_array('viewExpenseHeads', $user_permission) || in_array('deleteExpenseHeads', $user_permission)): ?>
+                      <li id="expense_headsNav">
+                        <a href="<?php echo base_url('expense_heads/') ?>">
+                          <i class="fa fa-files-o"></i> <span>Expense Heads</span>
+                        </a>
+                      </li>
+                    <?php endif; ?>
+
+
+              
+
+              </ul>
+            </li>
+          <?php endif; ?>
+
+           
+       
+
+          
+          <?php if(in_array('createReport', $user_permission) || in_array('updateReport', $user_permission) || in_array('viewReport', $user_permission) || in_array('deleteReport', $user_permission)): ?>
+            <li id="reportNav">
+              <a href="<?php echo base_url('report/') ?>">
+                <i class="fa fa-files-o"></i> <span>Report</span>
+              </a>
+            </li>
+          <?php endif; ?>
+        
+        
+
+          
+
+       
+          <!-- <?php //if(in_array('updateCompany', $user_permission)): ?>
+            <li style="display:none" id="companyNav"><a href="<?php //echo base_url('company/') ?>"><i class="fa fa-files-o"></i> <span>Company</span></a></li>
+          <?php //endif; ?> -->
+
+        
+
+        <!-- <li class="header">Settings</li> -->
+
+        <?php if(in_array('viewProfile', $user_permission)): ?>
+          <li><a href="<?php echo base_url('users/profile/') ?>"><i class="fa fa-user-o"></i> <span>Profile</span></a></li>
+        <?php endif; ?>
+        
+      <!--  <?php //if(in_array('updateSetting', $user_permission)): ?>
+          <li><a href="<?php //echo base_url('users/setting/') ?>"><i class="fa fa-wrench"></i> <span>Setting</span></a></li>
+        <?php //endif; ?> -->
+
+        <?php endif; ?>
+        <!-- user permission info -->
+        <li><a href="<?php echo base_url('auth/logout') ?>"><i class="glyphicon glyphicon-log-out"></i> <span>Logout</span></a></li>
+
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
